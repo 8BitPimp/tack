@@ -111,99 +111,99 @@ private:
     __m128 m;
 };
 
-// TODO: float4 operator+(const float4 &a) const
+// TODO: inline float4 operator+(const float4 &a) const
 
-// TODO: float4 operator-(const float4 &a) const
+// TODO: inline float4 operator-(const float4 &a) const
 
-float4 operator+(const float4& a, const float4& b)
+inline float4 operator+(const float4& a, const float4& b)
 {
     return _mm_add_ps(a, b);
 }
 
-float4 operator-(const float4& a, const float4& b)
+inline float4 operator-(const float4& a, const float4& b)
 {
     return _mm_sub_ps(a, b);
 }
 
-float4 operator*(const float4& a, const float4& b)
+inline float4 operator*(const float4& a, const float4& b)
 {
     return _mm_mul_ps(a, b);
 }
 
-float4 operator/(const float4& a, const float4& b)
+inline float4 operator/(const float4& a, const float4& b)
 {
     return _mm_div_ps(a, b);
 }
 
-// TODO: float4 operator%(const float4& a, const float4& b)
+// TODO: inline float4 operator%(const float4& a, const float4& b)
 
-float4 operator&(const float4& a, const float4& b)
+inline float4 operator&(const float4& a, const float4& b)
 {
     return _mm_and_ps(a, b);
 }
 
-float4 operator|(const float4& a, const float4& b)
+inline float4 operator|(const float4& a, const float4& b)
 {
     return _mm_or_ps(a, b);
 }
 
-float4 operator^(const float4& a, const float4& b)
+inline float4 operator^(const float4& a, const float4& b)
 {
     return _mm_andnot_ps(a, b);
 }
 
-float4 operator==(const float4& a, const float4& b)
+inline float4 operator==(const float4& a, const float4& b)
 {
     return _mm_cmpeq_ps(a, b);
 }
 
-float4 operator<(const float4& a, const float4& b)
+inline float4 operator<(const float4& a, const float4& b)
 {
     return _mm_cmplt_ps(a, b);
 }
 
-float4 operator<=(const float4& a, const float4& b)
+inline float4 operator<=(const float4& a, const float4& b)
 {
     return _mm_cmple_ps(a, b);
 }
 
-float4 operator>(const float4& a, const float4& b)
+inline float4 operator>(const float4& a, const float4& b)
 {
     return _mm_cmpgt_ps(a, b);
 }
 
-float4 operator>=(const float4& a, const float4& b)
+inline float4 operator>=(const float4& a, const float4& b)
 {
     return _mm_cmpge_ps(a, b);
 }
 
-float4 operator!=(const float4& a, const float4& b)
+inline float4 operator!=(const float4& a, const float4& b)
 {
     return _mm_cmpneq_ps(a, b);
 }
 
-float4 sqrt(const float4& a)
+inline float4 sqrt(const float4& a)
 {
     return _mm_sqrt_ps(a);
 }
 
-float4 rsqrt(const float4& a)
+inline float4 rsqrt(const float4& a)
 {
     return _mm_rsqrt_ps(a);
 }
 
-float4 max(const float4& a, const float4& b)
+inline float4 max(const float4& a, const float4& b)
 {
     return _mm_max_ps(a, b);
 }
 
-float4 min(const float4& a, const float4& b)
+inline float4 min(const float4& a, const float4& b)
 {
     return _mm_min_ps(a, b);
 }
 
 template <uint8_t x, uint8_t y, uint8_t z, uint8_t w>
-float4 shuffle(const float4& a, const float4& b)
+inline float4 shuffle(const float4& a, const float4& b)
 {
     return _mm_shuffle_ps(a, b, _MM_SHUFFLE(w, z, y, x));
 }
