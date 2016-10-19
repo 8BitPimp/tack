@@ -31,5 +31,5 @@ int main()
         }
     }
     printf("%zu of %zu passed\n", passed, s_tests.size());
-    return 0;
+    return passed != s_tests.size() ? 1 : 0;
 }
