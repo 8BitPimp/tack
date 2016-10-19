@@ -1,5 +1,5 @@
 #include "testing.h"
-#include "../include/tack/float4.h"
+#include <tack/float4.h>
 
 struct test_float4_t : public test_t {
 

@@ -31,6 +31,11 @@ struct test_t {
         return message_.c_str();
     }
 
+    bool has_message() const
+    {
+        return !message_.empty();
+    }
+
 protected:
     bool pass_;
     const char* name_;
