@@ -20,11 +20,14 @@ int main()
         printf("%s: ", test->name());
         test->run();
         if (test->failed()) {
-            printf("failed\n  - %s\n", test->message());
+            printf("failed\n");
         }
         else {
             ++passed;
             printf("passed\n");
+        }
+        if (test->has_message()) {
+            printf("  - %s\n", test->message());
         }
     }
     printf("%zu of %zu passed\n", passed, s_tests.size());
