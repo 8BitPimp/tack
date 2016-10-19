@@ -42,4 +42,4 @@ protected:
     std::string message_;
 };
 
-extern void register_test(test_t* instance);
+void register_test(test_t* instance);
