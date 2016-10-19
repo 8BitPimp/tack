@@ -97,7 +97,7 @@ struct float4 {
 
     float4& operator^=(const float4& a)
     {
-        m = _mm_andnot_ps(m, a);
+        m = _mm_xor_ps(m, a);
         return *this;
     }
 
@@ -157,7 +157,7 @@ inline float4 operator|(const float4& a, const float4& b)
 
 inline float4 operator^(const float4& a, const float4& b)
 {
-    return _mm_andnot_ps(a, b);
+    return _mm_xor_ps(a, b);
 }
 
 inline float4 operator==(const float4& a, const float4& b)
