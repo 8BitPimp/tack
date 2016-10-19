@@ -210,6 +210,12 @@ inline float4 min(const float4& a, const float4& b)
     return _mm_min_ps(a, b);
 }
 
+inline float4 abs(const float4& a)
+{
+    static const float4 sign_mask(-0.f);
+    return _mm_andnot_ps(sign_mask, a);
+}
+
 template <uint8_t x, uint8_t y, uint8_t z, uint8_t w>
 inline float4 shuffle(const float4& a, const float4& b)
 {
