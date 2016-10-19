@@ -43,14 +43,18 @@ struct float4 {
         return *this;
     }
 
+    template <bool aligned = false>
     void load(const float* in)
     {
-        m = is_aligned(in) ? _mm_load_ps(in) : _mm_loadu_ps(in);
+        alignment_check<aligned>(in);
+        m = aligned ? _mm_load_ps(in) : _mm_loadu_ps(in);
     }
 
+    template <bool aligned = false>
     void store(float* out) const
     {
-        is_aligned(out) ? _mm_store_ps(out, m) : _mm_storeu_ps(out, m);
+        alignment_check<aligned>(out);
+        aligned ? _mm_store_ps(out, m) : _mm_storeu_ps(out, m);
     }
 
     float4& operator+=(const float4& a)
@@ -91,7 +95,8 @@ struct float4 {
         return *this;
     }
 
-    float4& operator^=(const float4& a) {
+    float4& operator^=(const float4& a)
+    {
         m = _mm_andnot_ps(m, a);
         return *this;
     }
@@ -103,9 +108,12 @@ struct float4 {
     }
 
 private:
-    bool is_aligned(const float* in) const
+    template <bool aligned>
+    void alignment_check(const float* in) const
     {
-        return 0 == (size_t(in) & ((1 << alignof(__m128)) - 1));
+        if (aligned) {
+            assert(0 == (size_t(in) & ((1 << alignof(__m128)) - 1)));
+        }
     }
 
     __m128 m;
