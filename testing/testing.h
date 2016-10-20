@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <tack/float4.h>
 
 struct test_t {
 
@@ -59,6 +60,7 @@ protected:
 };
 
 void register_test(test_t* instance);
+bool equals(const tack::float4 &a, const tack::float4 &b, float tolerance=0.001f);
 
 #define TEST(GROUP, NAME)                           \
     namespace {                                     \
