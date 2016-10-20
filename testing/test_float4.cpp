@@ -9,7 +9,7 @@ TEST(float4, abs)
     const float4 b = abs(a);
     std::array<float, 4> out;
     b.store(out.data());
-    ASSERT(out[0] == 1.f && out[1] == 2.f && out[2] == 3.f && out[3] == 4.f);
+    ASSERT(equals(b, float4(1.f, 2.f, 3.f, 4.f)));
 }
 
 TEST(float4, equal)
