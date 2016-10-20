@@ -15,9 +15,9 @@ TEST(float4, abs)
 TEST(float4, equal)
 {
     using namespace tack;
-    float4 a(42, 23, 48, 64);
-    float4 b = a;
-    float4 c = a == b;
+    const float4 a(42, 23, 48, 64);
+    const float4 b = a;
+    const float4 c = a == b;
     std::array<float, 4> out;
     c.store(out.data());
     ASSERT_MSG(out[0] && out[1] && out[2] && out[3],
@@ -40,10 +40,7 @@ TEST(float4, blend)
     const float4 a(1.f);
     const float4 b(2.f);
     const float4 c = blend<e_aabb>(a, b);
-    ASSERT(c.x() == 1.f);
-    ASSERT(c.y() == 1.f);
-    ASSERT(c.z() == 2.f);
-    ASSERT(c.w() == 2.f);
+    ASSERT(equals(c, float4(1.f, 1.f, 2.f, 2.f)));
 }
 
 TEST(float4, swizzle)
