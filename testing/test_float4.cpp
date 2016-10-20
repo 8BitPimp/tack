@@ -20,5 +20,6 @@ TEST(float4, equal)
     float4 c = a == b;
     std::array<float, 4> out;
     c.store(out.data());
-    ASSERT(out[0] && out[1] && out[2] && out[3]);
+    ASSERT_MSG(out[0] && out[1] && out[2] && out[3],
+        "c is not equal to a");
 }
