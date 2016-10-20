@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <cstring>
 #include <tack/float4.h>
 
 struct test_t {
