@@ -121,7 +121,10 @@ private:
 
 // TODO: inline float4 operator+(const float4 &a) const
 
-// TODO: inline float4 operator-(const float4 &a) const
+inline float4 operator-(const float4& a)
+{
+    return _mm_xor_ps(a, _mm_set1_ps(-0.f));
+}
 
 inline float4 operator+(const float4& a, const float4& b)
 {
