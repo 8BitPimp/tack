@@ -6,13 +6,6 @@
 #include <x86intrin.h>
 
 namespace tack {
-enum element_t : int32_t {
-    e_x = 0,
-    e_y,
-    e_z,
-    e_w,
-};
-
 enum blend_t : int32_t {
     e_aaaa = 0,
     e_baaa,
@@ -291,6 +284,15 @@ enum swizzle_t : int32_t {
     e_wwww,
 };
 
+inline float punt_float(int32_t x) {
+    union {
+        int32_t i;
+        float f;
+    } tmp;
+    tmp.i = x;
+    return tmp.f;
+}
+
 struct float4 {
     float4()
         : m(_mm_setzero_ps())
@@ -392,15 +394,24 @@ struct float4 {
         return _mm_shuffle_ps(m, m, mask);
     }
 
-    template <element_t mask>
-    float get() const
+    float x() const
     {
-        union {
-            int i;
-            float f;
-        } tmp;
-        tmp.i = _mm_extract_ps(m, mask);
-        return tmp.f;
+        return punt_float(_mm_extract_ps(m, 0));
+    }
+
+    float y() const
+    {
+        return punt_float(_mm_extract_ps(m, 1));
+    }
+
+    float z() const
+    {
+        return punt_float(_mm_extract_ps(m, 2));
+    }
+
+    float w() const
+    {
+        return punt_float(_mm_extract_ps(m, 3));
     }
 
 private:
