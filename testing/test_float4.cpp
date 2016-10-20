@@ -23,3 +23,11 @@ TEST(float4, equal)
     ASSERT_MSG(out[0] && out[1] && out[2] && out[3],
         "c is not equal to a");
 }
+
+TEST(float4, unary_minus)
+{
+    using namespace tack;
+    const float4 a(-50.f, 30.f, 80.f, -123.f);
+    const float4 b = -a;
+    ASSERT(equals(b, float4(50.f, -30.f, -80.f, 123.f)));
+}
