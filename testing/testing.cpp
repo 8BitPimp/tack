@@ -1,7 +1,10 @@
 #include <cstdio>
 #include <cassert>
 #include <vector>
+#include <array>
+#include <cmath>
 #include "testing.h"
+#include <tack/float4.h>
 
 namespace {
 std::vector<test_t*> s_tests;
@@ -10,6 +13,16 @@ std::vector<test_t*> s_tests;
 void register_test(test_t* test)
 {
     s_tests.push_back(test);
+}
+
+bool equals(const tack::float4 &a, const tack::float4 &b, float tolerance) {
+    std::array<float, 4> av, bv;
+    a.store(av.data());
+    b.store(bv.data());
+    bool pass = true;
+    for (size_t i=0; i<4; ++i)
+        pass &= (fabsf(bv[i]-av[i]) < tolerance);
+    return pass;
 }
 
 int main()
