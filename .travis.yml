@@ -25,3 +25,4 @@ script:
   - cd build
   - cmake -G Ninja ..
   - ninja
+  - testing/testing
