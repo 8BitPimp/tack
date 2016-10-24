@@ -1,8 +1,8 @@
 #pragma once
-#include <string>
-#include <vector>
 #include <cstring>
+#include <string>
 #include <tack/float4.h>
+#include <vector>
 
 struct test_t {
 
@@ -61,7 +61,8 @@ protected:
 };
 
 void register_test(test_t* instance);
-bool equals(const tack::float4 &a, const tack::float4 &b, float tolerance=0.001f);
+bool equals(const float& a, const float& b, float tolerance = 0.001f);
+bool equals(const tack::float4& a, const tack::float4& b, float tolerance = 0.001f);
 
 #define TEST(GROUP, NAME)                           \
     namespace {                                     \
