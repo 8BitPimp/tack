@@ -140,7 +140,7 @@ private:
     void alignment_check(const float* in) const
     {
         if (aligned) {
-            assert(0 == (size_t(in) & ((1 << alignof(__m128)) - 1)));
+            assert(0 == (size_t(in) & (alignof(__m128) - 1)));
         }
     }
 

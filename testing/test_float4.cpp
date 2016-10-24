@@ -2,6 +2,102 @@
 #include <array>
 #include <tack/float4.h>
 
+TEST(float4, construct_value)
+{
+    tack::float4 a;
+    std::array<float, 4> o;
+    a.store(o.data());
+    for (auto& f : o) {
+        ASSERT(equals(0.f, f));
+    }
+}
+
+TEST(float4, construct_single)
+{
+    tack::float4 a(42);
+    std::array<float, 4> o;
+    a.store(o.data());
+    for (auto& f : o) {
+        ASSERT(equals(42.f, f));
+    }
+}
+
+TEST(float4, construct_multiple)
+{
+    tack::float4 a(42, 23, -42, -23);
+    std::array<float, 4> o;
+    a.store(o.data());
+    ASSERT(equals(42.f, o[0]));
+    ASSERT(equals(23.f, o[1]));
+    ASSERT(equals(-42.f, o[2]));
+    ASSERT(equals(-23.f, o[3]));
+}
+
+TEST(float4, construct_copy)
+{
+    tack::float4 a(42, 23, 48, 64);
+    tack::float4 b(a);
+    ASSERT(equals(a, b));
+}
+
+TEST(float4, assign_copy)
+{
+    tack::float4 a(42);
+    tack::float4 b;
+    b = a;
+    ASSERT(equals(a, b));
+}
+
+TEST(float4, load_store)
+{
+    std::array<float, 4> i = { 42, 23, -42, -23 };
+    tack::float4 f;
+    f.load(i.data());
+    std::array<float, 4> o;
+    f.store(o.data());
+    for (size_t index = 0; index < 4; index++) {
+        ASSERT(equals(i[index], o[index]));
+    }
+}
+
+TEST(float4, load_store_aligned)
+{
+    alignas(tack::float4) float i[4] = { 42, 23, -42, -23 };
+    tack::float4 f;
+    f.load<true>(i);
+    alignas(tack::float4) float o[4];
+    f.store<true>(o);
+    for (size_t index = 0; index < 4; index++) {
+        ASSERT(equals(i[index], o[index]));
+    }
+}
+
+TEST(float4, operator_assign_plus)
+{
+    tack::float4 a(-23);
+    a += tack::float4(42);
+    ASSERT(equals(a, tack::float4(-23 + 42)));
+}
+
+TEST(float4, operator_assign_minus)
+{
+    tack::float4 a(42);
+    a -= tack::float4(-256);
+    ASSERT(equals(a, tack::float4(42 - (-256))));
+}
+
+TEST(float4, operator_assign_multiply) {
+    tack::float4 a(4);
+    a *= tack::float4(19);
+    ASSERT(equals(a, tack::float4(4 * 19)));
+}
+
+TEST(float4, operator_assign_divide) {
+    tack::float4 a(45.5f);
+    a /= tack::float4(0.5f);
+    ASSERT(equals(a, tack::float4(45.5f / 0.5f)));
+}
+
 TEST(float4, abs)
 {
     using namespace tack;
