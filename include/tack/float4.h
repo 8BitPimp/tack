@@ -91,24 +91,6 @@ struct float4 {
 
     // TODO: float4& operator%=(const float4& a)
 
-    float4& operator&=(const float4& a)
-    {
-        m = _mm_and_ps(m, a);
-        return *this;
-    }
-
-    float4& operator|=(const float4& a)
-    {
-        m = _mm_or_ps(m, a);
-        return *this;
-    }
-
-    float4& operator^=(const float4& a)
-    {
-        m = _mm_xor_ps(m, a);
-        return *this;
-    }
-
     template <swizzle_t mask>
     float4 swizzle() const
     {
@@ -175,21 +157,6 @@ inline float4 operator/(const float4& a, const float4& b)
 }
 
 // TODO: inline float4 operator%(const float4& a, const float4& b)
-
-inline float4 operator&(const float4& a, const float4& b)
-{
-    return _mm_and_ps(a, b);
-}
-
-inline float4 operator|(const float4& a, const float4& b)
-{
-    return _mm_or_ps(a, b);
-}
-
-inline float4 operator^(const float4& a, const float4& b)
-{
-    return _mm_xor_ps(a, b);
-}
 
 inline float4 operator==(const float4& a, const float4& b)
 {
